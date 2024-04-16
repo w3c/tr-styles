@@ -311,6 +311,7 @@
     const colorScheme = localStorage.getItem("tr-theme") || "auto";
     darkCss.disabled = colorScheme === "light";
     darkCss.media = colorScheme === "auto" ? "(prefers-color-scheme: dark)" : "";
+    document.body.classList.toggle("darkmode", colorScheme !== "light")
     const render = document.createElement("div");
     function createOption(option) {
       const checked = option === colorScheme;
@@ -333,6 +334,7 @@
       const { value } = event.target;
       darkCss.disabled = value === "light";
       darkCss.media = value === "auto" ? "(prefers-color-scheme: dark)" : "";
+      document.body.classList.toggle("darkmode", value !== "light")
       localStorage.setItem("tr-theme", value);
     };
     render.querySelectorAll("input[type='radio']").forEach((input) => {
