@@ -584,16 +584,13 @@
 	@supports (list-style: "\21AA  ") {
 		dl.switch > dt {
 			display: list-item;
+			counter-increment: list-item 0;
 			list-style: "\21AA  ";
 			margin-left: -1.5em;
 			text-indent: 0;
 		}
 		dl.switch > dt::before {
 			content: none;
-		}
-		dl {
-			/* don't accidentally increment the implied list-item counter */
-			counter-reset: list-item;
 		}
 	}
 
