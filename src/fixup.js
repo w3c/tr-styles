@@ -311,6 +311,7 @@
     const colorScheme = localStorage.getItem("tr-theme") || "auto";
     darkCss.disabled = colorScheme === "light";
     darkCss.media = colorScheme === "auto" ? "(prefers-color-scheme: dark)" : "";
+    document.body.classList.toggle("darkmode", colorScheme !== "light")
     const render = document.createElement("div");
     function createOption(option) {
       const checked = option === colorScheme;
@@ -333,6 +334,7 @@
       const { value } = event.target;
       darkCss.disabled = value === "light";
       darkCss.media = value === "auto" ? "(prefers-color-scheme: dark)" : "";
+      document.body.classList.toggle("darkmode", value !== "light")
       localStorage.setItem("tr-theme", value);
     };
     render.querySelectorAll("input[type='radio']").forEach((input) => {
@@ -341,22 +343,6 @@
 
     var tocNav = document.querySelector('#toc-nav');
     tocNav.appendChild(...render.children);
-  }
-
-
-  /* Matomo analytics */
-  if (document.location.hostname === "www.w3.org" && /^\/TR\//.test(document.location.pathname)) {
-    var _paq = window._paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="https://www.w3.org/analytics/piwik/";
-      _paq.push(['setTrackerUrl', u+'matomo.php']);
-      _paq.push(['setSiteId', '447']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-    })();
   }
 
 })();
