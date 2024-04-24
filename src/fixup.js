@@ -309,9 +309,12 @@
   const darkCss = document.querySelector('link[rel~="stylesheet"][href^="https://www.w3.org/StyleSheets/TR/2021/dark"]');
   if (darkCss) {
     const colorScheme = localStorage.getItem("tr-theme") || "auto";
-    darkCss.disabled = colorScheme === "light";
-    darkCss.media = colorScheme === "auto" ? "(prefers-color-scheme: dark)" : "";
-    document.body.classList.toggle("darkmode", colorScheme !== "light")
+    const browserDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = colorScheme === "auto" ? (browserDarkMode ? "dark" : "light") : colorScheme;
+
+    darkCss.disabled = theme === "light";
+    darkCss.media = theme === "dark" ? "(prefers-color-scheme: dark)" : "";
+    document.body.classList.toggle("darkmode", theme === "dark")
     const render = document.createElement("div");
     function createOption(option) {
       const checked = option === colorScheme;
@@ -332,14 +335,22 @@
     `;
     const changeListener = (event) => {
       const { value } = event.target;
-      darkCss.disabled = value === "light";
-      darkCss.media = value === "auto" ? "(prefers-color-scheme: dark)" : "";
-      document.body.classList.toggle("darkmode", value !== "light")
+      const browserDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = value === "auto" ? (browserDarkMode ? "dark" : "light") : value;
+
+      darkCss.disabled = theme === "light";
+      darkCss.media = theme === "dark" ? "(prefers-color-scheme: dark)" : "";
+      document.body.classList.toggle("darkmode", theme === "dark")
       localStorage.setItem("tr-theme", value);
     };
     render.querySelectorAll("input[type='radio']").forEach((input) => {
       input.addEventListener("change", changeListener);
     });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      const colorScheme = localStorage.getItem("tr-theme") || "auto";
+      document.body.classList.toggle("darkmode", colorScheme === "auto" ? event.matches : colorScheme === "dark");
+  });
 
     var tocNav = document.querySelector('#toc-nav');
     tocNav.appendChild(...render.children);
