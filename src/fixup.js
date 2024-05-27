@@ -178,7 +178,7 @@
     if (ins.length == 0 && del.length == 0) { return; }
 
     var tbar = document.createElement('div');
-    tbar.lang = 'en'; tbar.class = 'amendment-toggles';
+    tbar.lang = 'en'; tbar.className = 'amendment-toggles removeOnSave';
 
     var toggle = document.createElement('button');
     toggle.value = 'diff'; toggle.innerHTML = 'Show Change'; toggle.disabled = true;
