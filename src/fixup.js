@@ -178,7 +178,10 @@
     if (ins.length == 0 && del.length == 0) { return; }
 
     var tbar = document.createElement('div');
-    tbar.lang = 'en'; tbar.className = 'amendment-toggles removeOnSave';
+    tbar.lang = 'en';
+    tbar.className = 'amendment-toggles';
+
+    if (document.respec) tbar.classList.add('removeOnSave');
 
     var toggle = document.createElement('button');
     toggle.value = 'diff'; toggle.innerHTML = 'Show Change'; toggle.disabled = true;
