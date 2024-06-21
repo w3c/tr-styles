@@ -16,8 +16,8 @@ img { background: white; }
 	--bg: black;
 
 	/* Absolute URLs due to https://bugs.webkit.org/show_bug.cgi?id=230243 */
-	--unofficial-watermark: url(https://www.w3.org/StyleSheets/TR/2021/logos/UD-watermark-light-unofficial);
-	--draft-watermark: url(https://www.w3.org/StyleSheets/TR/2021/logos/UD-watermark-light-draft);
+	--unofficial-watermark: url(https://www.w3.org/StyleSheets/TR/2021/logos/UD-watermark-dark-unofficial);
+	--draft-watermark: url(https://www.w3.org/StyleSheets/TR/2021/logos/UD-watermark-dark-draft);
 
 	--logo-bg: #1a5e9a;
 	--logo-active-bg: #c00;
