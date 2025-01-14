@@ -342,7 +342,7 @@
       const theme = value === "auto" ? (browserDarkMode ? "dark" : "light") : value;
 
       darkCss.disabled = theme === "light";
-      darkCss.media = theme === "dark" ? "(prefers-color-scheme: dark)" : "";
+      darkCss.media = "";
       document.body.classList.toggle("darkmode", theme === "dark")
       localStorage.setItem("tr-theme", value);
     };
@@ -353,7 +353,7 @@
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
       const colorScheme = localStorage.getItem("tr-theme") || "auto";
       document.body.classList.toggle("darkmode", colorScheme === "auto" ? event.matches : colorScheme === "dark");
-  });
+    });
 
     var tocNav = document.querySelector('#toc-nav');
     tocNav.appendChild(...render.children);
